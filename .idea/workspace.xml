@@ -19,10 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d24ab88-ecb2-4c56-9781-4765aeb05177" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Ribao.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
-    </list>
+    <list default="true" id="8d24ab88-ecb2-4c56-9781-4765aeb05177" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,8 +37,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Family Bot" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Python\herokutest" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -83,7 +85,7 @@
       <option name="presentableId" value="Default" />
       <updated>1602497096455</updated>
       <workItem from="1602497099649" duration="9000" />
-      <workItem from="1602497109729" duration="3681000" />
+      <workItem from="1602497109729" duration="4067000" />
     </task>
     <servers />
   </component>
@@ -106,26 +108,26 @@
       <screen x="0" y="0" width="1440" height="920" />
     </state>
     <state x="487" y="263" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.920@0.0.1440.920" timestamp="1602498294514" />
-    <state x="501" y="216" key="FileChooserDialogImpl" timestamp="1602497188706">
+    <state x="501" y="216" key="FileChooserDialogImpl" timestamp="1602503411818">
       <screen x="0" y="0" width="1440" height="920" />
     </state>
-    <state x="501" y="216" key="FileChooserDialogImpl/0.0.1440.920@0.0.1440.920" timestamp="1602497188706" />
-    <state width="1397" height="242" key="GridCell.Tab.0.bottom" timestamp="1602497774063">
+    <state x="501" y="216" key="FileChooserDialogImpl/0.0.1440.920@0.0.1440.920" timestamp="1602503411818" />
+    <state width="1397" height="242" key="GridCell.Tab.0.bottom" timestamp="1602503412888">
       <screen x="0" y="0" width="1440" height="920" />
     </state>
-    <state width="1397" height="242" key="GridCell.Tab.0.bottom/0.0.1440.920@0.0.1440.920" timestamp="1602497774063" />
-    <state width="1397" height="242" key="GridCell.Tab.0.center" timestamp="1602497774062">
+    <state width="1397" height="242" key="GridCell.Tab.0.bottom/0.0.1440.920@0.0.1440.920" timestamp="1602503412888" />
+    <state width="1397" height="242" key="GridCell.Tab.0.center" timestamp="1602503412888">
       <screen x="0" y="0" width="1440" height="920" />
     </state>
-    <state width="1397" height="242" key="GridCell.Tab.0.center/0.0.1440.920@0.0.1440.920" timestamp="1602497774062" />
-    <state width="1397" height="242" key="GridCell.Tab.0.left" timestamp="1602497774062">
+    <state width="1397" height="242" key="GridCell.Tab.0.center/0.0.1440.920@0.0.1440.920" timestamp="1602503412888" />
+    <state width="1397" height="242" key="GridCell.Tab.0.left" timestamp="1602503412888">
       <screen x="0" y="0" width="1440" height="920" />
     </state>
-    <state width="1397" height="242" key="GridCell.Tab.0.left/0.0.1440.920@0.0.1440.920" timestamp="1602497774062" />
-    <state width="1397" height="242" key="GridCell.Tab.0.right" timestamp="1602497774063">
+    <state width="1397" height="242" key="GridCell.Tab.0.left/0.0.1440.920@0.0.1440.920" timestamp="1602503412888" />
+    <state width="1397" height="242" key="GridCell.Tab.0.right" timestamp="1602503412888">
       <screen x="0" y="0" width="1440" height="920" />
     </state>
-    <state width="1397" height="242" key="GridCell.Tab.0.right/0.0.1440.920@0.0.1440.920" timestamp="1602497774063" />
+    <state width="1397" height="242" key="GridCell.Tab.0.right/0.0.1440.920@0.0.1440.920" timestamp="1602503412888" />
     <state x="222" y="106" key="SettingsEditor" timestamp="1602497195576">
       <screen x="0" y="0" width="1440" height="920" />
     </state>

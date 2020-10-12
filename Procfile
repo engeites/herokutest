@@ -1,1 +1,1 @@
-web: python Ribao.py
+worker: python Ribao.py
