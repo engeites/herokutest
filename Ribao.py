@@ -67,7 +67,7 @@ async def extract_ids(message: types.Message):
                 pass
     for id in selected_lines:
         text += id.strip() + "\n" 
-    await message:answer(text)
+    await message.answer(text)
 
 
 
