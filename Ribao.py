@@ -6,8 +6,9 @@ API_TOKEN = '1291655921:AAEe_7Pvk7vpshDU1i4F_4em3ryjdYr6qag'
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
-a = ''
 
+a = ''
+b = ''
 
 @dp.message_handler(commands=['count'])
 async def stop_it(message: types.Message):
@@ -29,7 +30,6 @@ async def stop_it(message: types.Message):
     await bot.send_message(1350298316, f"Bot was queried by: {message.from_user.username} \n")
     a = ''
 
-
 @dp.message_handler(commands=['help'])
 async def send_rules(message: types.Message):
 
@@ -50,16 +50,43 @@ UPD. 每日报告是一天一次实现的任务， 所以两个超管不能同�
     await message.answer(answer_text)
 
 
+@dp.message_handler(commands=['clean'])
+async def extract_ids(message: types.Message):
+    global b
+    selected_lines = []
+    all_lines = b.split('\n')
+    text = ''
+    for line in all_lines:
+        if "人气奖励" in line:
+            break
+        else:
+            try:
+                int(line[0])
+                selected_lines.append(line)
+            except:
+                pass
+    for id in selected_lines:
+        text += id.strip() + "\n" 
+    await message:answer(text)
+
+
+
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
      await message.reply("你好！请发 /help 指令为了学会 Ribao 使用")
 
 
+#-------------------------------------------------------
 #Get a peace of info
+#--------------------------------------------------------
 @dp.message_handler(content_types = types.ContentTypes.TEXT)
 async def add_data(message: types.Message):
-    global a
-    a += '\n' + message.text
+    if message.forward_from:
+        global b
+        b = message.text
+    else:
+        global a
+        a += '\n' + message.text
 
 
 def clean_data(data):
@@ -89,7 +116,6 @@ def divide_data(data):
     new_data = data.split('\n')
     return new_data
 
-
 # Count all the elements, adds Qiangs operations to the summ. Returns summ and number of Qiangs transactions
 def handle_data(data: list):
     qiangs_transactions = 0
@@ -113,7 +139,6 @@ def handle_data(data: list):
     summ = (summ + (8000 * qiangs_transactions))
 
     return qiangs_transactions, summ, big_transactions
-
 
 # Gets the summ of all the transactions having place. Used for checking purposes
 def count_all(data):
