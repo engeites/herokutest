@@ -10,6 +10,7 @@ dp = Dispatcher(bot)
 a = ''
 b = ''
 
+
 @dp.message_handler(commands=['count'])
 async def stop_it(message: types.Message):
 
@@ -22,7 +23,6 @@ async def stop_it(message: types.Message):
 
     numbers = clean_data(clear_data)
     result = handle_data(numbers)
-
 
     await message.answer(f'金额：{summ}')
     await message.answer(f'后台手动加值金额: {result[1]}\n强的交易： {result[0]} 次\n此外: {result[2]}\
@@ -56,17 +56,23 @@ async def extract_ids(message: types.Message):
     selected_lines = []
     all_lines = b.split('\n')
     text = ''
+    print(all_lines)
     for line in all_lines:
         if "人气奖励" in line:
+            print("I stop here")
             break
         else:
             try:
                 int(line[0])
+                print(f"I add {line} to selected_lines")
                 selected_lines.append(line)
             except:
-                pass
-    for id in selected_lines:
-        text += id.strip() + "\n" 
+                print(line)
+                print("I skip this line")
+                continue
+    for line in selected_lines:
+        text += line.strip() + "\n"
+        print(text)
     await message.answer(text)
 
 
@@ -81,7 +87,7 @@ async def send_welcome(message: types.Message):
 #--------------------------------------------------------
 @dp.message_handler(content_types = types.ContentTypes.TEXT)
 async def add_data(message: types.Message):
-    if message.forward_from:
+    if "排榜奖励" in message.text[:10]:
         global b
         b = message.text
     else:
@@ -139,6 +145,7 @@ def handle_data(data: list):
     summ = (summ + (8000 * qiangs_transactions))
 
     return qiangs_transactions, summ, big_transactions
+
 
 # Gets the summ of all the transactions having place. Used for checking purposes
 def count_all(data):
