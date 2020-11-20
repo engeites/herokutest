@@ -10,7 +10,6 @@ dp = Dispatcher(bot)
 a = ''
 b = ''
 
-
 @dp.message_handler(commands=['count'])
 async def stop_it(message: types.Message):
 
@@ -23,10 +22,18 @@ async def stop_it(message: types.Message):
 
     numbers = clean_data(clear_data)
     result = handle_data(numbers)
+    text = f"""
+    后台手动加值金额: {result[0]}
+    强的交易： {result[1]} 次
+    新雨交易： {result[2]} 次
+    异常交易：{result[3]}
+    正常交易：{result[4]}
+    
+共计: {((summ - result[0]))/10} 元
+    """
 
     await message.answer(f'金额：{summ}')
-    await message.answer(f'后台手动加值金额: {result[1]}\n强的交易： {result[0]} 次\n此外: {result[2]}\
-                         共计: {((summ - result[1]))/10} 元')
+    await message.answer(text)
     await bot.send_message(1350298316, f"Bot was queried by: {message.from_user.username} \n")
     a = ''
 
@@ -49,7 +56,6 @@ UPD. 每日报告是一天一次实现的任务， 所以两个超管不能同�
 
     await message.answer(answer_text)
 
-
 @dp.message_handler(commands=['clean'])
 async def extract_ids(message: types.Message):
     global b
@@ -60,6 +66,8 @@ async def extract_ids(message: types.Message):
     for line in all_lines:
         if "人气奖励" in line:
             print("I stop here")
+            break
+        elif "周榜人气奖励" in line:
             break
         else:
             try:
@@ -74,20 +82,17 @@ async def extract_ids(message: types.Message):
         text += line.strip() + "\n"
         print(text)
     await message.answer(text)
-
-
+    b = ""
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
      await message.reply("你好！请发 /help 指令为了学会 Ribao 使用")
 
 
-#-------------------------------------------------------
 #Get a peace of info
-#--------------------------------------------------------
 @dp.message_handler(content_types = types.ContentTypes.TEXT)
 async def add_data(message: types.Message):
-    if "排榜奖励" in message.text[:10]:
+    if "第一名" in message.text[:30]:
         global b
         b = message.text
     else:
@@ -122,30 +127,50 @@ def divide_data(data):
     new_data = data.split('\n')
     return new_data
 
+def check_xin(data):
+    possible_values = [106000, 212000, 318000, 424000, 530000,
+                       636000, 742000, 848000, 954000, 1060000]
+    if data in possible_values:
+        print(possible_values.index(data))
+        return possible_values.index(data)+1
+
+
+def check_qiang(data):
+    possible_values = [108000, 214000, 324000, 432000, 540000,
+                       648000, 756000, 846000, 972000, 1080000]
+    if data in possible_values:
+        print(possible_values.index(data))
+        return possible_values.index(data)+1
+
 # Count all the elements, adds Qiangs operations to the summ. Returns summ and number of Qiangs transactions
 def handle_data(data: list):
-    qiangs_transactions = 0
+    xin_transactions = 0
+    qiang_transactions = 0
     big_transactions = []
-    summ = 0
-    for i in data:
-        if i == 108000:
-            qiangs_transactions += 1
-        elif i == 216000:
-            qiangs_transactions += 2
-        elif i == 324000:
-            qiangs_transactions += 3
-        elif i > 324000:
-            print("BIG TRANSACTION: ", i)
-            big_transactions.append(i)
-
+    normal_transactions = []
+    for line in data:
+        if check_xin(line):
+            xin_transactions += check_xin(line)
+            continue
+        elif check_qiang(line):
+            qiang_transactions += check_qiang(line)
+            continue
+        elif line > 324000:
+            big_transactions.append(line)
+            continue
         else:
-            print("count this: ", i)
-            summ += i
+            normal_transactions.append(line)
+    print(f'Qiang: {qiang_transactions}')
+    print(f'Xin: {xin_transactions}')
+    print(f'Weird: {big_transactions}')
+    print(f'Normal: {normal_transactions}')
 
-    summ = (summ + (8000 * qiangs_transactions))
+    normal_transactions_summ = sum(normal_transactions)
+    overall_summ = (qiang_transactions * 8000) + (xin_transactions * 6000) + normal_transactions_summ
+    print(f"""Normal_transactions: {normal_transactions_summ}
+Overall summ: {overall_summ}""")
 
-    return qiangs_transactions, summ, big_transactions
-
+    return overall_summ, qiang_transactions, xin_transactions, big_transactions, normal_transactions_summ
 
 # Gets the summ of all the transactions having place. Used for checking purposes
 def count_all(data):
