@@ -1,6 +1,6 @@
 from aiogram import Bot, Dispatcher, executor, types
 
-API_TOKEN = '1291655921:AAEe_7Pvk7vpshDU1i4F_4em3ryjdYr6qag'
+API_TOKEN = '1734216202:AAG1l6r0t3U0NsBIiK4Y1l8jjReX9AYfWjg'
 
 
 bot = Bot(token=API_TOKEN)
@@ -25,7 +25,7 @@ async def stop_it(message: types.Message):
     text = f"""
     后台手动加值金额: {result[0]}
     强的交易： {result[1]} 次
-    新雨交易： {result[2]} 次
+    xin交易： {result[2]} 次
     异常交易：{result[3]}
     正常交易：{result[4]}
     
@@ -34,7 +34,8 @@ async def stop_it(message: types.Message):
 
     await message.answer(f'金额：{summ}')
     await message.answer(text)
-    await bot.send_message(1350298316, f"Bot was queried by: {message.from_user.username} \n")
+    await bot.send_message(1630394825, f"Bot was queried by: {message.from_user.username} \n")
+    await bot.send_message(1630394825, text)
     a = ''
 
 @dp.message_handler(commands=['help'])
