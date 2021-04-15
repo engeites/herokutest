@@ -2,6 +2,7 @@ from aiogram import Bot, Dispatcher, executor, types
 
 API_TOKEN = '1734216202:AAG1l6r0t3U0NsBIiK4Y1l8jjReX9AYfWjg'
 
+admin_id = 1630394825
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
@@ -18,7 +19,7 @@ async def stop_it(message: types.Message):
         clear_data = divide_data(a)
         summ = count_all(clear_data) - 1
     except Exception as e:
-        await bot.send_message(1350298316, f"发生了错误：\n{e}")
+        await bot.send_message(admin_id, f"发生了错误：\n{e}")
 
     numbers = clean_data(clear_data)
     result = handle_data(numbers)
@@ -34,8 +35,9 @@ async def stop_it(message: types.Message):
 
     await message.answer(f'金额：{summ}')
     await message.answer(text)
-    await bot.send_message(1630394825, f"Bot was queried by: {message.from_user.username} \n")
-    await bot.send_message(1630394825, text)
+    if Message.from_user.id != admin_id:
+        await bot.send_message(admin_id, f"Bot was queried by: {message.from_user.username} \n")
+        await bot.send_message(admin_id, text)
     a = ''
 
 @dp.message_handler(commands=['help'])
