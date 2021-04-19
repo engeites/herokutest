@@ -1,6 +1,8 @@
 from aiogram import Bot, Dispatcher, executor, types
 
 
+TG_TOKEN = os.environ['TG_TOKEN']
+admin_id = os.environ['admin_id']
 
 bot = Bot(token=TG_TOKEN)
 dp = Dispatcher(bot)
