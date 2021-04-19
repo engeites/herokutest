@@ -1,19 +1,16 @@
 from aiogram import Bot, Dispatcher, executor, types
 
-API_TOKEN = '1734216202:AAG1l6r0t3U0NsBIiK4Y1l8jjReX9AYfWjg'
 
-admin_id = 1630394825
 
-bot = Bot(token=API_TOKEN)
+bot = Bot(token=TG_TOKEN)
 dp = Dispatcher(bot)
-
 
 a = ''
 b = ''
 
+
 @dp.message_handler(commands=['count'])
 async def stop_it(message: types.Message):
-
     global a
     try:
         clear_data = divide_data(a)
@@ -29,20 +26,20 @@ async def stop_it(message: types.Message):
     xin交易： {result[2]} 次
     异常交易：{result[3]}
     正常交易：{result[4]}
-    
-共计: {((summ - result[0]))/10} 元
+
+共计: {((summ - result[0])) / 10} 元
     """
 
     await message.answer(f'金额：{summ}')
     await message.answer(text)
-    if Message.from_user.id != admin_id:
+    if message.from_user.id != admin_id:
         await bot.send_message(admin_id, f"Bot was queried by: {message.from_user.username} \n")
         await bot.send_message(admin_id, text)
     a = ''
 
+
 @dp.message_handler(commands=['help'])
 async def send_rules(message: types.Message):
-
     answer_text = """Ribao会帮助超管们计算每日报告里面用的数据
 
 
@@ -58,6 +55,7 @@ async def send_rules(message: types.Message):
 UPD. 每日报告是一天一次实现的任务， 所以两个超管不能同时用Ribao！要不然发生错误。"""
 
     await message.answer(answer_text)
+
 
 @dp.message_handler(commands=['clean'])
 async def extract_ids(message: types.Message):
@@ -87,13 +85,14 @@ async def extract_ids(message: types.Message):
     await message.answer(text)
     b = ""
 
+
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-     await message.reply("你好！请发 /help 指令为了学会 Ribao 使用")
+    await message.reply("你好！请发 /help 指令为了学会 Ribao 使用")
 
 
-#Get a peace of info
-@dp.message_handler(content_types = types.ContentTypes.TEXT)
+# Get a peace of info
+@dp.message_handler(content_types=types.ContentTypes.TEXT)
 async def add_data(message: types.Message):
     if "第一名" in message.text[:30]:
         global b
@@ -104,7 +103,6 @@ async def add_data(message: types.Message):
 
 
 def clean_data(data):
-
     daili_list = []
     summ_list = []
     search = '后台手动加值'
@@ -130,12 +128,13 @@ def divide_data(data):
     new_data = data.split('\n')
     return new_data
 
+
 def check_xin(data):
     possible_values = [106000, 212000, 318000, 424000, 530000,
                        636000, 742000, 848000, 954000, 1060000]
     if data in possible_values:
         print(possible_values.index(data))
-        return possible_values.index(data)+1
+        return possible_values.index(data) + 1
 
 
 def check_qiang(data):
@@ -143,7 +142,8 @@ def check_qiang(data):
                        648000, 756000, 846000, 972000, 1080000]
     if data in possible_values:
         print(possible_values.index(data))
-        return possible_values.index(data)+1
+        return possible_values.index(data) + 1
+
 
 # Count all the elements, adds Qiangs operations to the summ. Returns summ and number of Qiangs transactions
 def handle_data(data: list):
@@ -175,19 +175,20 @@ Overall summ: {overall_summ}""")
 
     return overall_summ, qiang_transactions, xin_transactions, big_transactions, normal_transactions_summ
 
+
 # Gets the summ of all the transactions having place. Used for checking purposes
 def count_all(data):
     listing = []
     number = 0
 
     for i in data:
-        new_line = i[i.find('金币充值')+4:].strip().replace('\t', ' ')
+        new_line = i[i.find('金币充值') + 4:].strip().replace('\t', ' ')
         coordinates = new_line.find(' ')
         new_line2 = new_line[:coordinates]
         try:
             int(new_line2)
             listing.append(int(new_line2))
-            number+=1
+            number += 1
 
         except ValueError:
             pass
