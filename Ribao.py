@@ -15,7 +15,7 @@ b = ''
 @dp.message_handler(commands=['count'])
 async def stop_it(message: types.Message):
     global a
-    await bot.send_message(admin_id, len(f"len(a) = {len(a)}"))
+    await bot.send_message(admin_id, f"len(a) = {len(a)}")
     try:
         data_by_lines = split_data_by_new_line(a)
         summ = count_all(data_by_lines) - 1
@@ -42,6 +42,12 @@ async def stop_it(message: types.Message):
         await bot.send_message(admin_id, text)
     a = ''
 
+
+@dp.message_handler(commands=['null_it'])
+async def null_a_var(message: types.Message)
+    global a
+    a = ""
+    await message.answer("a was set to 0")
 
 @dp.message_handler(commands=['help'])
 async def send_rules(message: types.Message):
