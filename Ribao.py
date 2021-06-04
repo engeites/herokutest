@@ -15,14 +15,16 @@ b = ''
 @dp.message_handler(commands=['count'])
 async def stop_it(message: types.Message):
     global a
+    await bot.send_message(admin_id, len(f"len(a) = {len(a)}"))
     try:
-        clear_data = divide_data(a)
-        summ = count_all(clear_data) - 1
+        data_by_lines = split_data_by_new_line(a)
+        summ = count_all(data_by_lines) - 1
     except Exception as e:
         await bot.send_message(admin_id, f"发生了错误：\n{e}")
+        summ = 0
 
-    numbers = clean_data(clear_data)
-    result = handle_data(numbers)
+    numbers = clean_data(data_by_lines)
+    result = prepare_user_answer(numbers)
     text = f"""
     后台手动加值金额: {result[0]}
     强的交易： {result[1]} 次
@@ -127,7 +129,7 @@ def clean_data(data):
 
 
 # transform a big peace of data into a list of lines
-def divide_data(data):
+def split_data_by_new_line(data):
     new_data = data.split('\n')
     return new_data
 
@@ -149,7 +151,7 @@ def check_qiang(data):
 
 
 # Count all the elements, adds Qiangs operations to the summ. Returns summ and number of Qiangs transactions
-def handle_data(data: list):
+def prepare_user_answer(data: list):
     xin_transactions = 0
     qiang_transactions = 0
     big_transactions = []
